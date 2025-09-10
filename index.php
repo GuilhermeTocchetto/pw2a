@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula12/08</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aula PHP com sql</title>
 </head>
 <body>
-    <?php
-        $listaFrutas = ["UVA","MACA", "ABACATE", "FRUTA"];
+	
+<?php
+$host = "localhost";
+$username = "aluno";
+$password = "aluno.etec";
+$database = "teste";
 
-        $tamanhoDaLista = count($listaFrutas);
+$conn = mysqli_connect($host, $username, $password, $database);
 
-        for($contadorFrutas=0; $contadorFrutas<$tamanhoDaLista; $contadorFrutas++){
+$sql = "SELECT cod,curso FROM cursos WHERE cod < 5";
 
-            echo "<br>Essa é a fruta $listaFrutas[$contadorFrutas]<br>";
-        }
+$resultados = myslqi_query($conn, $sql);
 
-        foreach($listaFrutas as $index => $fruta){
-            echo "<br>COM O FOREACH Essa é a fruta na posicao $index °- $fruta<br>";
-          
-        }
-        funcion exibeMensagem($vaorParaFuncaoMensagem){
-            echo "exiba uma menssagem e o valor recebido $vaorParaFuncaoMensagem <br><br><br><br>"
+if(mysqli_num_rows($resultados) == 0){
+	echo "sem resultados para exibir!";
+}
+echo "<table border='1'>";
+while($linha = mysqli_fetch_assoc($resultados)){
+	echo "<tr><td>" . $linha["cod"] . "</td><td>" . $linha["curso"] . "</td></tr>";
 
-        }
-        $vaorParaFuncaoMensagem = 50;
-        exibeMensagem
-        ($vaorParaFuncaoMensagem);
-    ?>
+echo "</table>";
+}
+
+?>
+
 </body>
 </html>
