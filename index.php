@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Aula PHP com sql</title>
+	<title>Meu banco de dados</title>
 </head>
-<body>
-	
-<?php
-$host = "localhost";
-$username = "aluno";
-$password = "aluno.etec";
-$database = "teste";
+	<body>
+		<?php
+			$host = "localhost";
+			$username = "aluno";
+			$password = "aluno.etec";
+			$database = "teste";
 
-$conn = mysqli_connect($host, $username, $password, $database);
 
-$sql = "SELECT cod,curso FROM cursos WHERE cod < 5";
+			$conn = mysqli_connect($host, $username, $password, $database);
 
-$resultados = myslqi_query($conn, $sql);
-
-if(mysqli_num_rows($resultados) == 0){
-	echo "sem resultados para exibir!";
-}
-echo "<table border='1'>";
-while($linha = mysqli_fetch_assoc($resultados)){
-	echo "<tr><td>" . $linha["cod"] . "</td><td>" . $linha["curso"] . "</td></tr>";
-
-echo "</table>";
-}
-
-?>
-
-</body>
+			$sql = "CREATE TABLE alunos (
+				cod INT NOT NULL AUTO_INCREMENT,
+				aluno VARCHAR(100) NOT NULL,
+				email VARCHAR(100),
+				celular VARCHAR(20),
+				PRIMARY KEY (cod)
+			)ENGINE=InnoDB DEFAULT CHARSET=utf8";
+		?>
+	</body>
 </html>
+
